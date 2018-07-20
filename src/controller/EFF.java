@@ -8,6 +8,7 @@ public class EFF {
 		// TODO Auto-generated method stub
 		System.load("C:\\opencv\\build\\java\\x64\\opencv_java341.dll");
 		ExtractFontFeature extractor=new ExtractFontFeature(args[0]);
+		extractor.TestImage("E:\\Pictures\\test_start.jpg");
 		//extractor.ExtractLetter();
 	}
 
