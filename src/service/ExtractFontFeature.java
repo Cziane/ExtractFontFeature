@@ -32,32 +32,6 @@ public class ExtractFontFeature {
 	private ArrayList<Rect> letters = new ArrayList<>();
 	private ArrayList<Letter> letters_list=new ArrayList<>();
 	private char[] charactersList= {
-			'a',
-			'b',
-			'c',
-			'd',
-			'e',
-			'f',
-			'g',
-			'h',
-			'i',
-			'j',
-			'k',
-			'l',
-			'm',
-			'n',
-			'o',
-			'p',
-			'q',
-			'r',
-			's',
-			't',
-			'u',
-			'v',
-			'w',
-			'x',
-			'y',
-			'z',
 			'A',
 			'B',
 			'C',
@@ -84,6 +58,32 @@ public class ExtractFontFeature {
 			'X',
 			'Y',
 			'Z',
+			'a',
+			'b',
+			'c',
+			'd',
+			'e',
+			'f',
+			'g',
+			'h',
+			'i',
+			'j',
+			'k',
+			'l',
+			'm',
+			'n',
+			'o',
+			'p',
+			'q',
+			'r',
+			's',
+			't',
+			'u',
+			'v',
+			'w',
+			'x',
+			'y',
+			'z',
 			'0',
 			'1',
 			'2',
@@ -129,11 +129,12 @@ public class ExtractFontFeature {
 		for(Rect r : this.letters) {
 			Mat line=fontImage.submat(r);
 			letters_list.add(new Letter(line,this.charactersList[indexChar]));
+			this.displayImage(this.Mat2BufferedImage(this.fontImage.submat(r)));
 			indexChar++;
 		}
 		
 		/*String result="";
-		for (int i=0; i< 1;i++) {
+		for (int i=0; i< letters_list.size();i++) {
 			int[] distances=new int[this.letters_list.size()];
 			for (int j=0; j < letters_list.size();j++) {
 				distances[j]=letters_list.get(i).distance(letters_list.get(j));
@@ -153,7 +154,6 @@ public class ExtractFontFeature {
 		imageOr=testImage.clone();
 		//this.displayImage(this.Mat2BufferedImage(imageOr));
 		Imgproc.cvtColor(testImage, testImage, Imgproc.COLOR_BGR2GRAY);
-		//Imgproc.equalizeHist(this.fontImage, this.fontImage);
 		Imgproc.threshold( testImage, testImage, 150,255,Imgproc.THRESH_BINARY );
 		this.displayImage(this.Mat2BufferedImage(testImage));
 		LinkedList<Rect> lines=this.ExtractLine(testImage);
@@ -166,7 +166,7 @@ public class ExtractFontFeature {
 		for(Rect rec : lets) {
 			this.displayImage(this.Mat2BufferedImage(testImage.submat(rec)));
 			Letter target=new Letter(testImage.submat(rec));
-			int[] distances=new int[this.letters_list.size()];
+			double[] distances=new double[this.letters_list.size()];
 			for(int i=0;i<this.letters_list.size();i++) {
 				distances[i]=target.distance(this.letters_list.get(i));
 				System.out.println(this.letters_list.get(i).getLetter() + " dist = " + distances[i]);
@@ -179,9 +179,9 @@ public class ExtractFontFeature {
 		
 		
 	}
-	 public static int findMinIdx(int[] numbers) {
+	 public static int findMinIdx(double[] numbers) {
 	        int idx=0;
-	        int value=numbers[0];
+	        double value=numbers[0];
 	        for(int i=1;i< numbers.length;i++) {
 	        	if(numbers[i]<value) {
 	        		idx=i;
